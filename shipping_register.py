@@ -7,6 +7,7 @@
     
     :license: AGPL, see LICENSE for more details.
 """
+import base64
 from ups import ShipmentConfirm, ShipmentAccept
 from osv import osv, fields
 
@@ -171,35 +172,35 @@ class UpsShippingRegister(osv.osv):
             
         # Shipper
         shipper = ShipmentConfirm.shipper_type(
+            shipper_address_elem,
             Name=shipper_address['company_name'],
             AttentionName=shipper_address['attention_name'],
             TaxIdentificationNumber=shipper_address['tin'],
             PhoneNumber=shipper_address['phone'],
             FaxNumber=shipper_address['fax'],
             EMailAddress=shipper_address['email'],
-            Address=shipper_address_elem,
             ShipperNumber=ups_shipper)
             
         # Ship to
         ship_to = ShipmentConfirm.ship_to_type(
+            ship_to_address_elem,
             CompanyName=to_address['company_name'],
             AttentionName=to_address['attention_name'],
             TaxIdentificationNumber=to_address['tin'],
             PhoneNumber=to_address['phone'],
             FaxNumber=to_address['fax'],
             EMailAddress=to_address['email'],
-            LocationId='None',
-            Address=ship_to_address_elem)
+            LocationId='None')
             
         # Ship from
         ship_from = ShipmentConfirm.ship_from_type(
+            ship_from_address_elem,
             CompanyName=from_address['company_name'],
             AttentionName=from_address['attention_name'],
             TaxIdentificationNumber=from_address['tin'],
             PhoneNumber=from_address['phone'],
             FaxNumber=from_address['fax'],
-            EMailAddress=from_address['email'],
-            Address=ship_from_address_elem)
+            EMailAddress=from_address['email'])
             
         return (shipper, ship_to, ship_from)
 
@@ -237,20 +238,19 @@ class UpsShippingRegister(osv.osv):
                 Description=shipment_record.description or 'None')
                 
             shipment_confirm_instance = self.get_ups_api(cursor, user, context)
-            
+                
             try:
                 response = shipment_confirm_instance.request(ship_confirm)
             except Exception, error:
                 raise osv.except_osv(('Error : '), ('%s' % error))
             # Now store values in the register
-
+                
             currency_id = currency_obj.search(cursor, user,
                 [('symbol', '=', \
-                response.ShipmentCharges.TotalCharges.CurrencyCode)], 
-                context=None)
-            uom_id = uom_obj.search(cursor, user,
-                [('name', '=', response.BillingWeight.UnitOfMeasurement.Code)], 
-                context=None)
+                    response.ShipmentCharges.TotalCharges.CurrencyCode)])
+            uom_id = uom_obj.search(cursor, user, [
+                ('name', '=', \
+                    response.BillingWeight.UnitOfMeasurement.Code.pyval)])
             self.write(cursor, user, shipment_record.id,
                 {
                     'name': response.ShipmentIdentificationNumber,
@@ -260,10 +260,11 @@ class UpsShippingRegister(osv.osv):
                         TotalCharges.MonetaryValue,
                     'total_amount_currency': currency_id and \
                                                 currency_id[0] or False,
-                    'digest': shipment_confirm_instance.\
-                        extract_digest(response),
+                    'digest': base64.encodestring(
+                        ShipmentConfirm.extract_digest(response)),
                     'state': 'confirmed'
                     }, context)
+                    
             packages_obj.write(cursor, user,
                 [pkg.id for pkg in shipment_record.package_det],
                 {'state': 'confirmed'}, context)
@@ -295,7 +296,7 @@ class UpsShippingRegister(osv.osv):
         packages_obj = self.pool.get('ups.shippingregister.package')
         for shipping_register_record in self.browse(cursor, user, ids, context):
             # writing image to digest so that it can be used.
-            DIGEST = shipping_register_record.digest
+            DIGEST = base64.decodestring(shipping_register_record.digest)
             shipment_accept = ShipmentAccept.\
                 shipment_accept_request_type(DIGEST)
                 
