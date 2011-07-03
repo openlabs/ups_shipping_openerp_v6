@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		<!-- Sequences for UpsShippingRegister -->
+		<record id="seq_type_shipment_name" model="ir.sequence.type">
+			<field name="name">UpsShippingRegister</field>
+			<field name="code">ups.shippingregister</field>
+		</record>
+		<record id="seq_shipment_name" model="ir.sequence">
+			<field name="name">UpsShippingRegister</field>
+			<field name="code">ups.shippingregister</field>
+			<field name="prefix">Shipment-</field>
+			<field name="padding">3</field>
+		</record>
+
+     </data>
+</openerp>

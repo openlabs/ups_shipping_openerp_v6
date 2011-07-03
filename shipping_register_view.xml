@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="ups_shipping_register_package_form" model="ir.ui.view">
+            <field name="name">ups.shipping.register.package.form</field>
+            <field name="model">ups.shippingregister.package</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="UPS Shipping Register">
+                    <group colspan="4">
+                        <separator string="Mandatory Inforamtion"
+                            colspan="4" />
+                        <field name="package_type" required="1"
+                            attrs="{'readonly':[('state','!=','draft')]}" />
+                        <field name="weight" required="1"
+                            attrs="{'readonly':[('state','!=','draft')]}" />
+                        <separator string="Optional Information"
+                            colspan="4" />
+                        <field name="height"
+                            attrs="{'readonly':[('state','!=','draft')]}" />
+                        <field name="length"
+                            attrs="{'readonly':[('state','!=','draft')]}" />
+                        <field name="width"
+                            attrs="{'readonly':[('state','!=','draft')]}" />
+                        <separator string="Description" colspan="4" />
+                        <field name="description"
+                            attrs="{'readonly':[('state','!=','draft')]}" 
+                            nolabel="1" colspan="4"/>
+                        <separator
+                            string="Status Information (Filled on confirmation by UPS)"
+                            colspan="4" />
+                        <field name="name" />
+                        <field name="tracking_no" readonly="1" />
+                        <field name="label_image" readonly="1" />
+                        <field name="state" readonly="1" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="ups_shipping_register_package_tree" model="ir.ui.view">
+            <field name="name">ups.shipping.register.package.tree</field>
+            <field name="model">ups.shippingregister.package</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="UPS Shipping Register">
+                    <field name="tracking_no" />
+                    <field name="package_type" required="1" />
+                    <field name="weight" required="1" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="ups_shipping_register_form" model="ir.ui.view">
+            <field name="name">ups.shipping.register.form</field>
+            <field name="model">ups.shippingregister</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="UPS Shipping Register">
+                    <group colspan="4">
+                        <field name="name" />
+                        <notebook colspan="4">
+                            <page string="Mandatory Information">
+                                <field name="shipper_address"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    on_change="on_change_shipper(shipper_address,from_address)" />
+                                <field name="from_address"
+                                    attrs="{'readonly':[('state','!=','draft')]}" />
+                                <field name="to_address"
+                                    attrs="{'readonly':[('state','!=','draft')]}" />
+                                <field name="service_type"
+                                    required="1"
+                                    attrs="{'readonly':[('state','!=','draft')]}" />
+                                <field name="saturday_delivery" 
+                                    attrs="{'readonly':[('state','!=','draft')]}" />
+                            </page>
+                            <page string="Description">
+                                <field name="description"
+                                    attrs="{'readonly':[('state','!=','draft')]}" 
+                                    nolabel="1" colspan="4"/>
+                            </page>
+                            <page string="UPS Response details">
+                                <field name="billed_weight" />
+                                <field name="billed_weight_uom" />
+                                <field name="total_amount" />
+                                <field name="total_amount_currency" />
+                            </page>
+                        </notebook>
+                        <field name="state" />
+                        <button name="do_shipping_request"
+                            string="Request" type="object" colspan="2"
+                            attrs="{'invisible':[('state', '!=', 'draft')]}" />
+                        <button name="set_to_draft" string="Edit"
+                            type="object" colspan="2"
+                            attrs="{'invisible':[('state', '!=', 'confirmed')]}" />
+                        <button name="accept_price" string="Accept"
+                            type="object" colspan="2"
+                            attrs="{'invisible':[('state', '!=', 'confirmed')]}" />
+                    </group>
+                    <newline />
+                    <field name="package_det" nolabel="1" string="Packages"
+                        widget="one2many_list" colspan="4" />
+                </form>
+            </field>
+        </record>
+
+        <record id="ups_shipping_register_tree" model="ir.ui.view">
+            <field name="name">ups.shipping.register.tree</field>
+            <field name="model">ups.shippingregister</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="UPS Shipping Register">
+                    <field name="name" />
+                    <field name="billed_weight" />
+                    <field name="billed_weight_uom" />
+                    <field name="total_amount" />
+                    <field name="total_amount_currency" />
+                    <field name="service_type" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ups_shipping_register_tree" model="ir.actions.act_window">
+            <field name="name">UPS Shipping Register</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ups.shippingregister</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="ups_shipping_register_tree" />
+        </record>
+        <menuitem action="action_ups_shipping_register_tree"
+            id="menu_action_ups_shipping_register_tree" parent="stock.menu_stock_root" />
+    </data>
+</openerp>
+
