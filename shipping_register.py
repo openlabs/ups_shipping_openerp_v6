@@ -7,7 +7,6 @@
     
     :license: AGPL, see LICENSE for more details.
 """
-import base64
 from ups import ShipmentConfirm, ShipmentAccept
 from osv import osv, fields
 
@@ -65,7 +64,7 @@ class UpsShippingRegister(osv.osv):
                 }
         return {}
     
-    def get_ups_api(self, cursor, user, context=None):
+    def get_ups_api(self, cursor, user, call='confirm', context=None):
         """
         Returns API with credentials set
         """
@@ -77,8 +76,12 @@ class UpsShippingRegister(osv.osv):
             raise osv.except_osv(('Error : '),
                 ('''Please check your license details for UPS account.
                     \nSome details may be missing.'''))
-        return ShipmentConfirm(ups_credentials[0], 
-            ups_credentials[1], ups_credentials[2], ups_credentials[3])
+        if call == 'confirm':
+            return ShipmentConfirm(ups_credentials[0], 
+                ups_credentials[1], ups_credentials[2], ups_credentials[3])
+        else:
+            return ShipmentAccept(ups_credentials[0], 
+                ups_credentials[1], ups_credentials[2], ups_credentials[3])
     
     def _add_packages(self, cursor, user, register_id, context=None):
         """
@@ -237,7 +240,8 @@ class UpsShippingRegister(osv.osv):
                 shipment_service, *packages, 
                 Description=shipment_record.description or 'None')
                 
-            shipment_confirm_instance = self.get_ups_api(cursor, user, context)
+            shipment_confirm_instance = self.get_ups_api(cursor, user, 
+                'confirm', context)
                 
             try:
                 response = shipment_confirm_instance.request(ship_confirm)
@@ -251,6 +255,9 @@ class UpsShippingRegister(osv.osv):
             uom_id = uom_obj.search(cursor, user, [
                 ('name', '=', \
                     response.BillingWeight.UnitOfMeasurement.Code.pyval)])
+                    
+            before = ShipmentConfirm.extract_digest(response)
+            
             self.write(cursor, user, shipment_record.id,
                 {
                     'name': response.ShipmentIdentificationNumber,
@@ -260,11 +267,12 @@ class UpsShippingRegister(osv.osv):
                         TotalCharges.MonetaryValue,
                     'total_amount_currency': currency_id and \
                                                 currency_id[0] or False,
-                    'digest': base64.encodestring(
-                        ShipmentConfirm.extract_digest(response)),
+                    'digest': ShipmentConfirm.extract_digest(response),
                     'state': 'confirmed'
                     }, context)
-                    
+            
+            after = self.browse(cursor, user, shipment_record.id).digest
+            
             packages_obj.write(cursor, user,
                 [pkg.id for pkg in shipment_record.package_det],
                 {'state': 'confirmed'}, context)
@@ -296,13 +304,14 @@ class UpsShippingRegister(osv.osv):
         packages_obj = self.pool.get('ups.shippingregister.package')
         for shipping_register_record in self.browse(cursor, user, ids, context):
             # writing image to digest so that it can be used.
-            DIGEST = base64.decodestring(shipping_register_record.digest)
-            shipment_accept = ShipmentAccept.\
-                shipment_accept_request_type(DIGEST)
+            shipment_accept = ShipmentAccept.shipment_accept_request_type(\
+                shipping_register_record.digest)
                 
-            shipment_accept_instance = self.get_ups_api(cursor, user, context)
+            shipment_accept_instance = self.get_ups_api(cursor, user, 
+                'accept', context)
                 
             try:
+                #response = shipment_accept_instance.request(shipment_accept)
                 response = shipment_accept_instance.request(shipment_accept)
             except Exception, error:
                 raise osv.except_osv(('Error : '), ('%s' % error))
@@ -318,12 +327,12 @@ class UpsShippingRegister(osv.osv):
             assert len(package_record_ids) == len(packages)
             for package in packages:
                 register_vals = {
-                    'tracking_no': package.TrackingNumber,
-                    'label_image': package.LabelImage.GraphicImage,
+                    'tracking_no': package.TrackingNumber.pyval,
+                    'label_image': package.LabelImage.GraphicImage.pyval,
                     'state': 'accepted'
                 }
                 packages_obj.write(
-                    cursor, user, package_record_ids[packages.index(each)],
+                    cursor, user, package_record_ids[packages.index(package)],
                     register_vals, context)
             # changing state to accepted of shipping register record.
             self.write(cursor, user, shipping_register_record.id, 
