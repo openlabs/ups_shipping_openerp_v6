@@ -4,8 +4,8 @@
    contain the root `toctree` directive.
    
 
-API References
-##############
+API Reference
+#############
 
 contents:
 
