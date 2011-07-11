@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Stock Integrated Shipping Client &mdash; UPS Integration with OpenERP v0.2 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.2',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="UPS Integration with OpenERP v0.2 documentation" href="index.html" />
+    <link rel="next" title="About Openlabs Technologies and Consulting Private Limited" href="Aboutus.html" />
+    <link rel="prev" title="Standalone Shipping Client" href="SSC.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="Aboutus.html" title="About Openlabs Technologies and Consulting Private Limited"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="SSC.html" title="Standalone Shipping Client"
+             accesskey="P">previous</a> |</li>
+        <li><a href="y.html">UPS Integration with OpenERP v0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="stock-integrated-shipping-client">
+<h1>Stock Integrated Shipping Client<a class="headerlink" href="#stock-integrated-shipping-client" title="Permalink to this headline">¶</a></h1>
+<p>The module is tightly integrated with Stock Picking of OpenERP. However before
+using it with shippping some Pre-Configuration needs to be done:</p>
+<div class="section" id="pre-configuration">
+<h2>Pre-Configuration<a class="headerlink" href="#pre-configuration" title="Permalink to this headline">¶</a></h2>
+<p>All products have Net Weight. Prior to the installation of this module Net
+Weights were not manadatory.</p>
+<img alt="_images/Screenshot20.png" src="_images/Screenshot20.png" style="width: 1000px;" />
+<div class="section" id="illustration-13-sample-product-screen">
+<h3><strong>Illustration 13</strong>: <em>Sample Product Screen</em><a class="headerlink" href="#illustration-13-sample-product-screen" title="Permalink to this headline">¶</a></h3>
+<p>Stock location must have an address.</p>
+<img alt="_images/Screenshot21.png" src="_images/Screenshot21.png" style="width: 1000px;" />
+<dl class="docutils">
+<dt><strong>Illustration 14</strong>: <em>Setting address to Stock Location as</em>:</dt>
+<dd><em>Warehouse &gt;&gt; Configuration &gt;&gt; Warehouse Management &gt;&gt; Location</em></dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="using-with-stock-picking">
+<h2>Using with Stock Picking<a class="headerlink" href="#using-with-stock-picking" title="Permalink to this headline">¶</a></h2>
+<p>The Stock Picking screen will now show an extra tab for shipping information
+after products are selected and state of the picking is done.</p>
+<img alt="_images/Screenshot22.png" src="_images/Screenshot22.png" style="width: 1000px;" />
+<div class="section" id="illustration-15-stock-picking-with-shipping-tab">
+<h3><strong>Illustration 15</strong>: <em>Stock Picking with Shipping tab</em><a class="headerlink" href="#illustration-15-stock-picking-with-shipping-tab" title="Permalink to this headline">¶</a></h3>
+<p><em>Option 1</em>: Select an already created Shipping record (in the Standalone Mode)
+to the picking</p>
+<img alt="_images/Screenshot23.png" src="_images/Screenshot23.png" style="width: 1000px;" />
+</div>
+<div class="section" id="illustration-16-associating-with-existing-shipping-record">
+<h3><strong>Illustration 16</strong>: <em>Associating with existing Shipping Record</em>.<a class="headerlink" href="#illustration-16-associating-with-existing-shipping-record" title="Permalink to this headline">¶</a></h3>
+<p><em>Option 2</em>: Or choose to create a new Shipping Record from the Pre-Filled data
+in the stock move.</p>
+<img alt="_images/Screenshot24.png" src="_images/Screenshot24.png" style="width: 1000px;" />
+</div>
+<div class="section" id="illustration-17-generating-new-shipping-from-stock-picking-information">
+<h3><strong>Illustration 17</strong>: <em>Generating new shipping from Stock Picking Information</em><a class="headerlink" href="#illustration-17-generating-new-shipping-from-stock-picking-information" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><em>Package Weights</em>: Package weights indicate the various packings you may
+have in the shipment. For example you may decide to ship a packet of 15 Kgs
+in two packs of 10 and 5 each or 7 and 8 each. You can indicate your weights
+by seperating them by commas as shown in the figure. By default the weight
+is automatically computed and packs are created for each line in the picking.</li>
+<li><em>Service Type</em>: Refer UPS manual</li>
+<li><em>Package Type</em>: Refer UPS manual - All products have same picking.</li>
+</ol>
+<p>On clicking <em>Generate Shipping</em> a new shipping record is created
+(just as with the standalone mode). The created record can be seen in the field
+for &#8216;UPS Shipping Register&#8217;. And clicking the Folder Icon opens the Resource.</p>
+<p>The created Shipping Record is in the Draft stage and is not confirmed.</p>
+<p>It can be confirmed by clicking &#8216;Request&#8217; then &#8216;Accept&#8217;, which generates the
+label.</p>
+<p>The screenshots are below:</p>
+<img alt="_images/Screenshot25.png" src="_images/Screenshot25.png" style="width: 1000px;" />
+</div>
+<div class="section" id="illustration-18-final-screens-of-stock-after-generation-of-picking">
+<h3><strong>Illustration 18</strong>: <em>Final screens of Stock after Generation of picking</em>.<a class="headerlink" href="#illustration-18-final-screens-of-stock-after-generation-of-picking" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="y.html">
+              <img class="logo" src="_static/128-128.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="y.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Stock Integrated Shipping Client</a><ul>
+<li><a class="reference external" href="#pre-configuration">Pre-Configuration</a><ul>
+<li><a class="reference external" href="#illustration-13-sample-product-screen"><strong>Illustration 13</strong>: <em>Sample Product Screen</em></a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#using-with-stock-picking">Using with Stock Picking</a><ul>
+<li><a class="reference external" href="#illustration-15-stock-picking-with-shipping-tab"><strong>Illustration 15</strong>: <em>Stock Picking with Shipping tab</em></a></li>
+<li><a class="reference external" href="#illustration-16-associating-with-existing-shipping-record"><strong>Illustration 16</strong>: <em>Associating with existing Shipping Record</em>.</a></li>
+<li><a class="reference external" href="#illustration-17-generating-new-shipping-from-stock-picking-information"><strong>Illustration 17</strong>: <em>Generating new shipping from Stock Picking Information</em></a></li>
+<li><a class="reference external" href="#illustration-18-final-screens-of-stock-after-generation-of-picking"><strong>Illustration 18</strong>: <em>Final screens of Stock after Generation of picking</em>.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="SSC.html"
+                                  title="previous chapter">Standalone Shipping Client</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Aboutus.html"
+                                  title="next chapter">About Openlabs Technologies and Consulting Private Limited</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/SISC.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Aboutus.html" title="About Openlabs Technologies and Consulting Private Limited"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="SSC.html" title="Standalone Shipping Client"
+             >previous</a> |</li>
+        <li><a href="y.html">UPS Integration with OpenERP v0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2011, Openlabs Technologies &amp; Consulting (P) Limited.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+    </div>
+  </body>
+</html>

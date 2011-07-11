@@ -1,8 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"acl_1","codes_admin","model_ups_codes","base.group_system",1,1,1,1
-"acl_2","codes_user","model_ups_codes","stock.group_stock_user",1,0,0,0
-"acl_3","codes_manager","model_ups_codes","stock.group_stock_manager",1,0,0,0
-"acl_4","register_user","model_ups_shippingregister","stock.group_stock_user",1,1,1,0
-"acl_5","package_user","model_ups_shippingregister_package","stock.group_stock_user",1,1,1,0
-"acl_6","register_manager","model_ups_shippingregister","stock.group_stock_manager",1,1,1,1
-"acl_7","package_manager","model_ups_shippingregister_package","stock.group_stock_manager",1,1,1,1
