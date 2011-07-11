@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,18 +7,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>API References &mdash; UPS Integration with OpenERP v0.2 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.2',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="top" title="UPS Integration with OpenERP v0.2 documentation" href="index.html" />
@@ -31,12 +33,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
-             accesskey="M">modules</a> |</li>
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="Aboutus.html" title="About Openlabs Technologies and Consulting Private Limited"
              accesskey="P">previous</a> |</li>
-        <li><a href="y.html">UPS Integration with OpenERP v0.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">UPS Integration with OpenERP v0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -48,10 +50,12 @@
   <div class="section" id="api-references">
 <h1>API References<a class="headerlink" href="#api-references" title="Permalink to this headline">¶</a></h1>
 <p>contents:</p>
+<div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
+</div>
 <div class="section" id="module-ups_shipping.res_company">
-<h2>Company<a class="headerlink" href="#module-ups_shipping.res_company" title="Permalink to this headline">¶</a></h2>
+<span id="company"></span><h2>Company<a class="headerlink" href="#module-ups_shipping.res_company" title="Permalink to this headline">¶</a></h2>
 <p>Customizes company to have UPS API Information</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -78,7 +82,7 @@
 <dd><p>Company is the highest level of abstraction in open ERP
 This will add four fields for license key, username, password</p>
 <blockquote>
-and shipper no.</blockquote>
+<div>and shipper no.</div></blockquote>
 <dl class="method">
 <dt id="ups_shipping.res_company.ResCompany.get_ups_credentials">
 <tt class="descname">get_ups_credentials</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.res_company.ResCompany.get_ups_credentials" title="Permalink to this definition">¶</a></dt>
@@ -99,18 +103,20 @@ and shipper no.</blockquote>
 <dl class="method">
 <dt id="ups_shipping.res_company.ResCompany.get_ups_shipper">
 <tt class="descname">get_ups_shipper</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.res_company.ResCompany.get_ups_shipper" title="Permalink to this definition">¶</a></dt>
-<dd>Returns the UPS Shipper</dd></dl>
+<dd><p>Returns the UPS Shipper</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="ups_shipping.res_company.ResCompany.get_ups_uoms">
 <tt class="descname">get_ups_uoms</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.res_company.ResCompany.get_ups_uoms" title="Permalink to this definition">¶</a></dt>
-<dd>Returns the codes of weight and length UOM used by UPS</dd></dl>
+<dd><p>Returns the codes of weight and length UOM used by UPS</p>
+</dd></dl>
 
 </dd></dl>
 
 </div>
 <div class="section" id="module-ups_shipping.res_partner">
-<h2>Partner<a class="headerlink" href="#module-ups_shipping.res_partner" title="Permalink to this headline">¶</a></h2>
+<span id="partner"></span><h2>Partner<a class="headerlink" href="#module-ups_shipping.res_partner" title="Permalink to this headline">¶</a></h2>
 <p>Customizes Address to return UPS API style address</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -146,10 +152,10 @@ These details are to be used by the UPS integration API.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><em>cursor</em> &#8211; Database Cursor</li>
-<li><em>user</em> &#8211; ID of User</li>
-<li><em>id</em> &#8211; ID of the Record sent by the calling statement</li>
-<li><em>context</em> &#8211; Context from parent method.(no direct use)</li>
+<li><strong>cursor</strong> &#8211; Database Cursor</li>
+<li><strong>user</strong> &#8211; ID of User</li>
+<li><strong>id</strong> &#8211; ID of the Record sent by the calling statement</li>
+<li><strong>context</strong> &#8211; Context from parent method.(no direct use)</li>
 </ul>
 </td>
 </tr>
@@ -165,7 +171,7 @@ of the package recipient.</p>
 
 </div>
 <div class="section" id="module-ups_shipping.shipping_register">
-<h2>Shipping<a class="headerlink" href="#module-ups_shipping.shipping_register" title="Permalink to this headline">¶</a></h2>
+<span id="shipping"></span><h2>Shipping<a class="headerlink" href="#module-ups_shipping.shipping_register" title="Permalink to this headline">¶</a></h2>
 <p>Shipping register</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -189,7 +195,8 @@ of the package recipient.</p>
 <dl class="class">
 <dt id="ups_shipping.shipping_register.UpsCodes">
 <em class="property">class </em><tt class="descclassname">ups_shipping.shipping_register.</tt><tt class="descname">UpsCodes</tt><big>(</big><em>pool</em>, <em>cr</em><big>)</big><a class="headerlink" href="#ups_shipping.shipping_register.UpsCodes" title="Permalink to this definition">¶</a></dt>
-<dd>Model to store the UPS Service Types and Packaging Types</dd></dl>
+<dd><p>Model to store the UPS Service Types and Packaging Types</p>
+</dd></dl>
 
 <dl class="class">
 <dt id="ups_shipping.shipping_register.UpsShippingRegister">
@@ -198,12 +205,13 @@ of the package recipient.</p>
 <dl class="method">
 <dt id="ups_shipping.shipping_register.UpsShippingRegister.accept_price">
 <tt class="descname">accept_price</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>ids</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.shipping_register.UpsShippingRegister.accept_price" title="Permalink to this definition">¶</a></dt>
-<dd>This method calls the Accept Price function of the wizard .
+<dd><p>This method calls the Accept Price function of the wizard .
 :param cursor: Database Cursor
 :param user: ID of User
 :param ids: ID of Current record.
 :param context: Context(no direct use).
-:return: True</dd></dl>
+:return: True</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="ups_shipping.shipping_register.UpsShippingRegister.do_shipping_request">
@@ -215,9 +223,9 @@ to the API and gets the total cost of shipment and tracking number.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><em>cursor</em> &#8211; Database Cursor</li>
-<li><em>user</em> &#8211; ID of User</li>
-<li><em>context</em> &#8211; Context directly uses active id.</li>
+<li><strong>cursor</strong> &#8211; Database Cursor</li>
+<li><strong>user</strong> &#8211; ID of User</li>
+<li><strong>context</strong> &#8211; Context directly uses active id.</li>
 </ul>
 </td>
 </tr>
@@ -228,29 +236,33 @@ to the API and gets the total cost of shipment and tracking number.</p>
 <dl class="method">
 <dt id="ups_shipping.shipping_register.UpsShippingRegister.get_ups_api">
 <tt class="descname">get_ups_api</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>call='confirm'</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.shipping_register.UpsShippingRegister.get_ups_api" title="Permalink to this definition">¶</a></dt>
-<dd>Returns API with credentials set</dd></dl>
+<dd><p>Returns API with credentials set</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="ups_shipping.shipping_register.UpsShippingRegister.on_change_shipper">
 <tt class="descname">on_change_shipper</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>ids</em>, <em>shipper_address</em>, <em>from_address</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.shipping_register.UpsShippingRegister.on_change_shipper" title="Permalink to this definition">¶</a></dt>
-<dd>Sets from address as shipper address if nothing is specified</dd></dl>
+<dd><p>Sets from address as shipper address if nothing is specified</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="ups_shipping.shipping_register.UpsShippingRegister.set_to_draft">
 <tt class="descname">set_to_draft</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>ids</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.shipping_register.UpsShippingRegister.set_to_draft" title="Permalink to this definition">¶</a></dt>
-<dd>This method will set this record back to draft and editable mode</dd></dl>
+<dd><p>This method will set this record back to draft and editable mode</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="ups_shipping.shipping_register.UpsShippingRegisterPackage">
 <em class="property">class </em><tt class="descclassname">ups_shipping.shipping_register.</tt><tt class="descname">UpsShippingRegisterPackage</tt><big>(</big><em>pool</em>, <em>cr</em><big>)</big><a class="headerlink" href="#ups_shipping.shipping_register.UpsShippingRegisterPackage" title="Permalink to this definition">¶</a></dt>
-<dd>Model to record all packages corresponding
-to a shipment record and keep track of it.</dd></dl>
+<dd><p>Model to record all packages corresponding
+to a shipment record and keep track of it.</p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-ups_shipping.stock">
-<h2>Stock<a class="headerlink" href="#module-ups_shipping.stock" title="Permalink to this headline">¶</a></h2>
+<span id="stock"></span><h2>Stock<a class="headerlink" href="#module-ups_shipping.stock" title="Permalink to this headline">¶</a></h2>
 <p>Inherits stock.picking to create a new page for &#8216;Shipping Information&#8217;
 which appears only in &#8216;done&#8217; state.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -279,12 +291,14 @@ which appears only in &#8216;done&#8217; state.</p>
 <dl class="method">
 <dt id="ups_shipping.stock.StockPicking.generate_shipping">
 <tt class="descname">generate_shipping</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>ids</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.stock.StockPicking.generate_shipping" title="Permalink to this definition">¶</a></dt>
-<dd>Generates shipping record from given information</dd></dl>
+<dd><p>Generates shipping record from given information</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="ups_shipping.stock.StockPicking.onchange_existing">
 <tt class="descname">onchange_existing</tt><big>(</big><em>cursor</em>, <em>user</em>, <em>ids</em>, <em>is_existing</em>, <em>required_packing</em>, <em>context=None</em><big>)</big><a class="headerlink" href="#ups_shipping.stock.StockPicking.onchange_existing" title="Permalink to this definition">¶</a></dt>
-<dd>On change of shipping of existing set the packings</dd></dl>
+<dd><p>On change of shipping of existing set the packings</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -297,41 +311,41 @@ which appears only in &#8216;done&#8217; state.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="y.html">
+            <p class="logo"><a href="index.html">
               <img class="logo" src="_static/128-128.png" alt="Logo"/>
             </a></p>
-            <h3><a href="y.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">API References</a><ul>
-<li><a class="reference external" href="#module-ups_shipping.res_company">Company</a></li>
-<li><a class="reference external" href="#module-ups_shipping.res_partner">Partner</a></li>
-<li><a class="reference external" href="#module-ups_shipping.shipping_register">Shipping</a></li>
-<li><a class="reference external" href="#module-ups_shipping.stock">Stock</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API References</a><ul>
+<li><a class="reference internal" href="#module-ups_shipping.res_company">Company</a></li>
+<li><a class="reference internal" href="#module-ups_shipping.res_partner">Partner</a></li>
+<li><a class="reference internal" href="#module-ups_shipping.shipping_register">Shipping</a></li>
+<li><a class="reference internal" href="#module-ups_shipping.stock">Stock</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="Aboutus.html"
-                                  title="previous chapter">About Openlabs Technologies and Consulting Private Limited</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/api_reference.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Aboutus.html"
+                        title="previous chapter">About Openlabs Technologies and Consulting Private Limited</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/api_reference.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -343,17 +357,17 @@ which appears only in &#8216;done&#8217; state.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
           <a href="Aboutus.html" title="About Openlabs Technologies and Consulting Private Limited"
              >previous</a> |</li>
-        <li><a href="y.html">UPS Integration with OpenERP v0.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">UPS Integration with OpenERP v0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2011, Openlabs Technologies &amp; Consulting (P) Limited.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+        &copy; Copyright 2011, Openlabs Technologies &amp; Consulting (P) Limited.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>
