@@ -6,18 +6,18 @@
 #    
 #    :license: AGPL, see LICENSE for more details.
 {
-    'name' : 'Shipping Integration with UPS',
-    'version' : '1.0.0',
-    'author' : '''Open Labs Business Solutions, 
+    'name': 'Shipping Integration with UPS',
+    'version': '1.0.1',
+    'author': '''Open Labs Business Solutions,
         Openlabs Technologies & Consulting (P) Ltd.''',
     'website': 'http://openlabs.co.in',
-    'category' : 'Customised Modules',
-    'depends' : [
+    'category': 'Customised Modules',
+    'depends': [
                  "base",
                  "stock",
                  ],
-    'init_xml' : [],
-    'demo_xml' : [],
+    'init_xml': [],
+    'demo_xml': [],
     'description': """
     Integrates United Parcel Service of America Shipping services
     = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -27,7 +27,7 @@
       3. On confirmation the images for label are fetched
       4. Integrated with stock picking for easy generation
          directly from stock
-    
+
     """,
     'update_xml': [
                    'company_view.xml',
@@ -39,5 +39,5 @@
                    'security/ir.model.access.csv',
                 ],
     'installable': True,
-    'active': False,    
+    'active': False,
 }

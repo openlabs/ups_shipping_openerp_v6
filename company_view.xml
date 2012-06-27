@@ -17,6 +17,7 @@
                     <field name="ups_weight_uom" />
                     <field name="ups_length_uom" />
                     <field name="ups_test" />
+                    <field name="ups_save_xml" />
                     <newline/>
                 </xpath>
             </field>
