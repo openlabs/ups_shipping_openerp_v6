@@ -7,7 +7,7 @@
 #    :license: AGPL, see LICENSE for more details.
 {
     'name': 'Shipping Integration with UPS',
-    'version': '1.0.1',
+    'version': '1.1.1',
     'author': '''Open Labs Business Solutions,
         Openlabs Technologies & Consulting (P) Ltd.''',
     'website': 'http://openlabs.co.in',
