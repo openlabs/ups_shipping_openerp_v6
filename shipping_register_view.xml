@@ -22,6 +22,9 @@
                             attrs="{'readonly':[('state','!=','draft')]}" />
                         <field name="width"
                             attrs="{'readonly':[('state','!=','draft')]}" />
+                        <separator string="Service Options" colspan="4" />
+                        <field name="insured_value"
+                            attrs="{'readonly':[('state','!=','draft')]}" />
                         <separator string="Description" colspan="4" />
                         <field name="description"
                             attrs="{'readonly':[('state','!=','draft')]}" 
@@ -48,6 +51,35 @@
                     <field name="package_type" required="1" />
                     <field name="weight" required="1" />
                     <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="ups_message_tree" model="ir.ui.view">
+            <field name="name">ups.message.tree</field>
+            <field name="model">ups.message</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="XML Messages">
+                    <field name="name" />
+                    <field name="type" />
+                    <field name="shipping_register_rel" />
+                    <field name="message_bin" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="ups_message_form" model="ir.ui.view">
+            <field name="name">ups.message.form</field>
+            <field name="model">ups.message</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <tree string="XML Messages">
+                    <field name="name" />
+                    <field name="type" />
+                    <field name="shipping_register_rel" />
+                    <newline />
+                    <field name="message" colspan="4" />
                 </tree>
             </field>
         </record>
@@ -85,18 +117,28 @@
                                 <field name="billed_weight_uom" />
                                 <field name="total_amount" />
                                 <field name="total_amount_currency" />
+                                <field 
+				    name="xml_messages" 
+				    widget="one2many_list" 
+				    nolabel="1" 
+				    colspan="4"
+				    groups="base.group_extended" />
                             </page>
                         </notebook>
-                        <field name="state" />
+                        <field name="state" colspan="4"/>
+                        <newline />
                         <button name="do_shipping_request"
-                            string="Request" type="object" colspan="2"
+                            string="Request" type="object" colspan="4"
                             attrs="{'invisible':[('state', '!=', 'draft')]}" />
                         <button name="set_to_draft" string="Edit"
-                            type="object" colspan="2"
+                            type="object" colspan="4"
                             attrs="{'invisible':[('state', '!=', 'confirmed')]}" />
                         <button name="accept_price" string="Accept"
-                            type="object" colspan="2"
+                            type="object" colspan="4"
                             attrs="{'invisible':[('state', '!=', 'confirmed')]}" />
+                        <button name="do_shipping_void" string="Cancel"
+                            type="object" colspan="4"
+                            attrs="{'invisible':[('state', '!=', 'accepted')]}" />
                     </group>
                     <newline />
                     <field name="package_det" nolabel="1" string="Packages"
